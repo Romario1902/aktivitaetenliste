@@ -208,3 +208,23 @@ function clearForm() {
 }
 
 loadActivities();
+
+const channel = window.supabaseClient
+  .channel("activities-realtime")
+
+  .on(
+    "postgres_changes",
+    {
+      event: "*",
+      schema: "public",
+      table: "activities"
+    },
+    payload => {
+      console.log("Realtime Update", payload);
+      loadActivities();
+    }
+  )
+
+  .subscribe(status => {
+    console.log("Realtime Status:", status);
+  });
