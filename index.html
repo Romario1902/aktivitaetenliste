@@ -4,20 +4,105 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aktivitätenliste</title>
-
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h1>Aktivitätenliste</h1>
+  <header>
+    <h1>Aktivitätenliste</h1>
+    <button onclick="openModal()">Neuer Eintrag</button>
+  </header>
 
-  <input type="text" id="activityInput" placeholder="Neue Aktivität">
+<section class="filters">
 
-  <button onclick="addActivity()">Hinzufügen</button>
+  <div class="filter-group">
+    <strong>Kategorie</strong>
 
-  <ul id="activityList"></ul>
+    <label><input type="checkbox" name="filterCategory" value="Essen & Trinken" onchange="renderTable()"> Essen & Trinken</label>
+    <label><input type="checkbox" name="filterCategory" value="Veranstaltung" onchange="renderTable()"> Veranstaltung</label>
+    <label><input type="checkbox" name="filterCategory" value="Ausflug" onchange="renderTable()"> Ausflug</label>
+    <label><input type="checkbox" name="filterCategory" value="Wellness" onchange="renderTable()"> Wellness</label>
+    <label><input type="checkbox" name="filterCategory" value="Sport" onchange="renderTable()"> Sport</label>
+    <label><input type="checkbox" name="filterCategory" value="Shopping" onchange="renderTable()"> Shopping</label>
+    <label><input type="checkbox" name="filterCategory" value="Sonstiges" onchange="renderTable()"> Sonstiges</label>
+  </div>
+
+  <div class="filter-group">
+    <strong>Wetter</strong>
+
+    <label><input type="checkbox" name="filterWeather" value="Wetter egal" onchange="renderTable()"> Wetter egal</label>
+    <label><input type="checkbox" name="filterWeather" value="Gutes Wetter" onchange="renderTable()"> Gutes Wetter</label>
+    <label><input type="checkbox" name="filterWeather" value="Schlechtes Wetter" onchange="renderTable()"> Schlechtes Wetter</label>
+  </div>
+
+  <div class="filter-group">
+    <strong>Person</strong>
+
+    <label><input type="checkbox" name="filterAuthor" value="Person 1" onchange="renderTable()"> Person 1</label>
+    <label><input type="checkbox" name="filterAuthor" value="Person 2" onchange="renderTable()"> Person 2</label>
+    <label><input type="checkbox" name="filterAuthor" value="Person 3" onchange="renderTable()"> Person 3</label>
+  </div>
+
+  <button onclick="resetFilters()">Filter zurücksetzen</button>
+
+</section>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Kategorie</th>
+        <th>Inhalt</th>
+        <th>Adresse</th>
+        <th>Wetter</th>
+        <th>Von</th>
+        <th>Datum</th>
+        <th>Aktion</th>
+      </tr>
+    </thead>
+    <tbody id="activityTableBody"></tbody>
+  </table>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+
+      <h2>Neuer Eintrag</h2>
+
+      <select id="category">
+        <option value="">Kategorie wählen</option>
+        <option>Essen & Trinken</option>
+        <option>Veranstaltung</option>
+        <option>Ausflug</option>
+        <option>Wellness</option>
+        <option>Sport</option>
+        <option>Shopping</option>
+        <option>Sonstiges</option>
+      </select>
+
+      <textarea id="content" placeholder="Beschreibung / Idee"></textarea>
+
+      <input type="text" id="address" placeholder="Adresse (optional)">
+
+      <select id="weather">
+        <option>Wetter egal</option>
+        <option>Gutes Wetter</option>
+        <option>Schlechtes Wetter</option>
+      </select>
+
+      <select id="author">
+        <option value="">Wer hat es eingetragen?</option>
+        <option>Person 1</option>
+        <option>Person 2</option>
+        <option>Person 3</option>
+      </select>
+
+      <div class="modal-buttons">
+        <button onclick="saveActivity()">Speichern</button>
+        <button class="cancel-btn" onclick="closeModal()">Abbrechen</button>
+      </div>
+
+    </div>
+  </div>
 
   <script src="script.js"></script>
-
 </body>
 </html>
