@@ -7,47 +7,72 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div id="loginScreen" class="login-screen">
+  <div class="login-box">
+    <h2>Zugangscode</h2>
 
-  <header>
-    <h1>Aktivitätenliste</h1>
+    <input
+  type="password"
+  id="passwordInput"
+  placeholder="Code eingeben"
+  oninput="checkPassword()"
+>
+
+    <p id="loginError"></p>
+  </div>
+</div>
+
+<div id="appContent" style="display: none;">
+<header>
+  <h1>Aktivitätenliste</h1>
+
+  <div class="header-buttons">
+  <button
+  class="secondary-btn"
+  onclick="openCategoryModal()"
+>
+  Kategorien
+</button>
     <button onclick="openModal()">Neuer Eintrag</button>
-  </header>
+  </div>
+</header>
 
 <section class="filters">
 
-  <div class="filter-group">
-    <strong>Kategorie</strong>
+  <details class="filter-dropdown">
+    <summary>Kategorie</summary>
 
-    <label><input type="checkbox" name="filterCategory" value="Essen & Trinken" onchange="renderTable()"> Essen & Trinken</label>
-    <label><input type="checkbox" name="filterCategory" value="Veranstaltung" onchange="renderTable()"> Veranstaltung</label>
-    <label><input type="checkbox" name="filterCategory" value="Ausflug" onchange="renderTable()"> Ausflug</label>
-    <label><input type="checkbox" name="filterCategory" value="Wellness" onchange="renderTable()"> Wellness</label>
-    <label><input type="checkbox" name="filterCategory" value="Sport" onchange="renderTable()"> Sport</label>
-    <label><input type="checkbox" name="filterCategory" value="Shopping" onchange="renderTable()"> Shopping</label>
-    <label><input type="checkbox" name="filterCategory" value="Sonstiges" onchange="renderTable()"> Sonstiges</label>
-  </div>
+    <div id="categoryFilterContent"></div>
+  </details>
 
-  <div class="filter-group">
-    <strong>Wetter</strong>
+  <details class="filter-dropdown">
+    <summary>Wetter</summary>
 
     <label><input type="checkbox" name="filterWeather" value="Wetter egal" onchange="renderTable()"> Wetter egal</label>
+
     <label><input type="checkbox" name="filterWeather" value="Gutes Wetter" onchange="renderTable()"> Gutes Wetter</label>
+
     <label><input type="checkbox" name="filterWeather" value="Schlechtes Wetter" onchange="renderTable()"> Schlechtes Wetter</label>
-  </div>
+  </details>
 
-  <div class="filter-group">
-    <strong>Person</strong>
+  <details class="filter-dropdown">
+    <summary>Person</summary>
 
-    <label><input type="checkbox" name="filterAuthor" value="Person 1" onchange="renderTable()"> Person 1</label>
-    <label><input type="checkbox" name="filterAuthor" value="Person 2" onchange="renderTable()"> Person 2</label>
-    <label><input type="checkbox" name="filterAuthor" value="Person 3" onchange="renderTable()"> Person 3</label>
-  </div>
+    <label><input type="checkbox" name="filterAuthor" value="Charleen" onchange="renderTable()"> Charleen</label>
 
-  <button onclick="resetFilters()">Filter zurücksetzen</button>
+    <label><input type="checkbox" name="filterAuthor" value="Christin" onchange="renderTable()"> Christin</label>
+
+    <label><input type="checkbox" name="filterAuthor" value="Sarah" onchange="renderTable()"> Sarah</label>
+  </details>
+
+  <button onclick="resetFilters()">
+    Filter zurücksetzen
+  </button>
 
 </section>
 
-  <table>
+ <div class="table-wrapper">
+  <table></div>
     <thead>
       <tr>
         <th>Kategorie</th>
@@ -90,9 +115,9 @@
 
       <select id="author">
         <option value="">Wer hat es eingetragen?</option>
-        <option>Person 1</option>
-        <option>Person 2</option>
-        <option>Person 3</option>
+        <option>Charleen</option>
+        <option>Christin</option>
+        <option>Sarah</option>
       </select>
 
       <div class="modal-buttons">
@@ -102,8 +127,31 @@
 
     </div>
   </div>
+<div id="categoryModal" class="modal">
+  <div class="modal-content">
 
- <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <h2>Kategorien pflegen</h2>
+
+    <div class="category-input-row">
+      <input
+        type="text"
+        id="newCategoryName"
+        placeholder="Neue Kategorie"
+      >
+
+      <button onclick="addCategory()">Hinzufügen</button>
+    </div>
+
+    <div id="categoryList" class="category-list"></div>
+
+    <div class="modal-buttons">
+      <button class="cancel-btn" onclick="closeCategoryModal()">Schließen</button>
+    </div>
+
+  </div>
+</div>
+</div> 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
 <script>
 
