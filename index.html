@@ -103,6 +103,24 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<script>
+
+const SUPABASE_URL =
+  "https://trkqtazhbzlpbgjjzqnz.supabase.co";
+
+const SUPABASE_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRya3F0YXpoYnpscGJnamp6cW56Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg4NDMxMTUsImV4cCI6MjA5NDQxOTExNX0.Zo0YB45tOKwcVZHIxu1__QMsOehbHaiUWIwPY1xIDP4";
+
+window.supabaseClient =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+</script>
+
+<script src="script.js"></script>
 </body>
 </html>
